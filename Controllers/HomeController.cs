@@ -1,6 +1,7 @@
 ﻿using BudgetCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace BudgetCalculator.Controllers
@@ -8,7 +9,7 @@ namespace BudgetCalculator.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-
+		public List<BudgetModel> Budgets { get; set; } = new List<BudgetModel>();
 		public HomeController(ILogger<HomeController> logger)
 		{
 			_logger = logger;
@@ -16,19 +17,19 @@ namespace BudgetCalculator.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-			var model = new BudgetModel() { Description = "Hello", Value = 500 };
-			return View(model);
+			return View(model: Budgets);
 		}
 
 		[HttpPost]
-		public IActionResult Index(BudgetModel model)
+		public IActionResult Privacy(BudgetModel model)
 		{
+			Budgets.Add(model);
 			return RedirectToAction(nameof(Index));
 		}
 
 		public IActionResult Privacy()
 		{
-			return View();
+			return View(new BudgetModel());
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
