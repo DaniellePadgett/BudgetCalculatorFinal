@@ -24,7 +24,7 @@ namespace BudgetCalculator.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Privacy(BudgetModel model)
+		public IActionResult BudgetEntries(BudgetModel model)
 		{
 			if (ModelState.IsValid == false) return View(model);
 			_context.Budgets.Add(model);
@@ -32,7 +32,7 @@ namespace BudgetCalculator.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		//[HttpPost]
+		[HttpPost]
 		public IActionResult DeleteResult(int id)
 		{
 			var model = _context.Budgets.Find(id);
@@ -41,7 +41,7 @@ namespace BudgetCalculator.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		public IActionResult Privacy()
+		public IActionResult BudgetEntries()
 		{
 			return View(new BudgetModel());
 		}
