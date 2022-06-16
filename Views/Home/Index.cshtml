@@ -1,12 +1,14 @@
 ﻿@using System.Globalization
 @model List<BudgetModel>
+
 <div class="container">
 	<div class="row">
+		<div class="p-3 mb-2 bg-transparent text-dark">.bg-transparent</div>
 		<div class="col-12">
 			<h3 class="text-center">Budget Calculator</h3>
 		</div>
 	</div>
-	<hr />
+	<hr/>
 	<div class="row">
 		<div class="col-12">
 			<table class="table table-striped">
@@ -19,20 +21,20 @@
 				{
 					<tr>
 						<td>@budget.Description</td>
-						<td class=@(budget.Value >= 0? "text-success" : "text-danger")>@budget.Value.ToString("C", CultureInfo.GetCultureInfo("en-gb"))</td>
+						<td class=@(budget.Value >= 0 ? "text-success" : "text-danger")>@budget.Value.ToString("C", CultureInfo.GetCultureInfo("en-gb"))</td>
 						<td>
-							<a class="btn btn-danger" asp-controller="Home" asp-action="DeleteResult" asp-route-id="@budget.Id">Delete</a> 
+							<a class="btn btn-danger" asp-controller="Home" asp-action="DeleteResult" asp-route-id="@budget.Id">Delete</a>
 						</td>
 					</tr>
 				}
-				
+
 			</table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-12">
 			Total Value:
-			<span class="@(Model.Sum(x => x.Value) >= 0? "text-success" : "text-danger")"> 
+			<span class="@(Model.Sum(x => x.Value) >= 0 ? "text-success" : "text-danger")">
 				@Model.Sum(x => x.Value).ToString("C", CultureInfo.GetCultureInfo("en-gb"))
 			</span>
 		</div>
