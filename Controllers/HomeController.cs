@@ -26,7 +26,17 @@ namespace BudgetCalculator.Controllers
 		[HttpPost]
 		public IActionResult Privacy(BudgetModel model)
 		{
+			if (ModelState.IsValid == false) return View(model);
 			_context.Budgets.Add(model);
+			_context.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
+
+		//[HttpPost]
+		public IActionResult DeleteResult(int id)
+		{
+			var model = _context.Budgets.Find(id);
+			_context.Budgets.Remove(model);
 			_context.SaveChanges();
 			return RedirectToAction(nameof(Index));
 		}

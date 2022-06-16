@@ -1,4 +1,5 @@
-﻿@model List<BudgetModel>
+﻿@using System.Globalization
+@model List<BudgetModel>
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -12,16 +13,28 @@
 				<tr>
 					<th>Description</th>
 					<th>Value</th>
+					<th>Actions</th>
 				</tr>
 				@foreach (var budget in Model)
 				{
 					<tr>
 						<td>@budget.Description</td>
-						<td>@budget.Value</td>
+						<td class=@(budget.Value >= 0? "text-success" : "text-danger")>@budget.Value.ToString("C", CultureInfo.GetCultureInfo("en-gb"))</td>
+						<td>
+							<a class="btn btn-danger" asp-controller="Home" asp-action="DeleteResult" asp-route-id="@budget.Id">Delete</a> 
+						</td>
 					</tr>
 				}
 				
 			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			Total Value:
+			<span class="@(Model.Sum(x => x.Value) >= 0? "text-success" : "text-danger")"> 
+				@Model.Sum(x => x.Value).ToString("C", CultureInfo.GetCultureInfo("en-gb"))
+			</span>
 		</div>
 	</div>
 </div>
