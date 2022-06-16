@@ -1,13 +1,10 @@
+using dboBudgets;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BudgetCalculator
 {
@@ -23,6 +20,8 @@ namespace BudgetCalculator
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddDbContext<BudgetCalculatordbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("BudgetdbContext"),
+				y => y.MigrationsAssembly(typeof(dboBudgets.BudgetCalculatordbContext).Assembly.FullName)));
 			services.AddControllersWithViews();
 		}
 

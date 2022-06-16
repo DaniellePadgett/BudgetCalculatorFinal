@@ -1,29 +1,33 @@
 ﻿using BudgetCalculator.Models;
+using dboBudgets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace BudgetCalculator.Controllers
 {
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		public List<BudgetModel> Budgets { get; set; } = new List<BudgetModel>();
-		public HomeController(ILogger<HomeController> logger)
+		private BudgetCalculatordbContext _context;
+		public HomeController(ILogger<HomeController> logger, BudgetCalculatordbContext context)
 		{
+			_context = context;
 			_logger = logger;
 		}
 		[HttpGet]
 		public IActionResult Index()
 		{
-			return View(model: Budgets);
+			var budgets = _context.Budgets.ToList();
+			return View(model: budgets);
 		}
 
 		[HttpPost]
 		public IActionResult Privacy(BudgetModel model)
 		{
-			Budgets.Add(model);
+			_context.Budgets.Add(model);
+			_context.SaveChanges();
 			return RedirectToAction(nameof(Index));
 		}
 
