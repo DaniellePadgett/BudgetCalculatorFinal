@@ -32,7 +32,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12">
-			Total Value:
+			<strong>Value:</strong> 
 			<span class="@(Model.Sum(x => x.Value) >= 0 ? "text-success" : "text-danger")">
 				@Model.Sum(x => x.Value).ToString("C", CultureInfo.GetCultureInfo("en-gb"))
 			</span>

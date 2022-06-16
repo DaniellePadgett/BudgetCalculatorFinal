@@ -32,7 +32,7 @@ namespace BudgetCalculator.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		[HttpPost]
+		//[HttpPost]
 		public IActionResult DeleteResult(int id)
 		{
 			var model = _context.Budgets.Find(id);

@@ -11,17 +11,17 @@
 }
 
 .link-primary {
-  color: #0d6efd;
+    color: #d63384;
 }
 .link-primary:hover, .link-primary:focus {
-  color: #0a58ca;
+  color: #dc3545;
 }
 
 .link-secondary {
-  color: #6c757d;
+    color: #6f42c1;
 }
 .link-secondary:hover, .link-secondary:focus {
-  color: #565e64;
+  color: #0d6efd;
 }
 
 .link-success {
